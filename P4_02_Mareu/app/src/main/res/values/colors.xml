@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#03A9F4</color>
+    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorAccent">#F44336</color>
+    <color name="colorText">#606060</color>
+    <color name="colorTextTitle">#CC000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--     COLOR LOCATION     -->
+    <color name="MARIO">#FB7879</color>
+    <color name="LUIGI">#B8FFA5</color>
+    <color name="PEACH">#FBC1FF</color>
+    <color name="TOAD">#FFC8A3</color>
+    <color name="YOSHI">#91C576</color>
+    <color name="DONKEY">#805F57</color>
+    <color name="KOOPA">#FFEF7E</color>
+    <color name="BOO">#EBF7FF</color>
+    <color name="WARIO">#BCC8FF</color>
+    <color name="BOWSER">#FF9371</color>
+</resources>

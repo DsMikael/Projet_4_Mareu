@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix, MissingConstraints, UnusedAttribute">
+
+    <ImageView
+        android:id="@+id/item_list_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ic_circle"
+        android:backgroundTint="#CCd7e5ee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/item_list_avatar"
+        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
+        app:layout_constraintStart_toEndOf="@id/item_list_avatar"
+        app:layout_constraintTop_toTopOf="@id/item_list_avatar">
+
+        <TextView
+            android:id="@+id/item_list_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            tools:text="Réunion A - 14h00 - Peach" />
+
+        <TextView
+            android:id="@+id/item_list_recipient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:ignore="MissingConstraints"
+            tools:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/item_list_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_delete_white"
+        app:tint="#001B49"
+        android:contentDescription="@string/delete" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
