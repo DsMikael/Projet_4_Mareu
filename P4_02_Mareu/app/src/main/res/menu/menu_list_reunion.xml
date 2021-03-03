@@ -12,5 +12,4 @@
                 android:id="@+id/filter_venue"/>
         </menu>
     </item>
-
 </menu>

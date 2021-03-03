@@ -1,5 +1,7 @@
 package fr.mdasilva.mareu.data.model;
 
+import android.widget.SpinnerAdapter;
+
 import androidx.annotation.ColorRes;
 
 public class Location {
@@ -8,6 +10,8 @@ public class Location {
     private int color;
     private String name;
 
+
+
     /**
      * Constructor
      * @param color
@@ -15,6 +19,10 @@ public class Location {
      */
     public Location(@ColorRes int color, String name){
         this.color = color;
+        this.name = name;
+    }
+
+    public Location(String name){
         this.name = name;
     }
 

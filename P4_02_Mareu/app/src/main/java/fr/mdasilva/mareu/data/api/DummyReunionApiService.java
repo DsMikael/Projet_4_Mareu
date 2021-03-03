@@ -3,6 +3,7 @@ package fr.mdasilva.mareu.data.api;
 
 import java.util.List;
 
+import fr.mdasilva.mareu.data.model.Location;
 import fr.mdasilva.mareu.data.model.Reunion;
 
 /**

@@ -18,11 +18,12 @@ public class ListReunionActivityViewModel extends ViewModel {
 
     public MutableLiveData<LoadingState> loadingState = new MutableLiveData<>(LoadingState.Loading);
 
-    public void initList() {
+    public ListReunionActivityViewModel() {
         loadingState.postValue(LoadingState.Loading);
         new Handler().postDelayed(() -> {
             reunions.postValue(new DummyReunionApiService().getReunion());
             loadingState.postValue(LoadingState.Loaded);
         }, 2000);
+
     }
 }

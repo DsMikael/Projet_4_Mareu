@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +39,7 @@ public class ListReunionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AddReunionActivity.navigate(ListReunionActivity.this);
-                Toast.makeText(ListReunionActivity.this, "whaooooo", Toast.LENGTH_LONG).show();
+             //   Toast.makeText(ListReunionActivity.this, "whaooooo", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -66,11 +65,6 @@ public class ListReunionActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        initList();
-    }
-    private void initList()
-    {
-        viewModel.initList();
     }
 
     @Override

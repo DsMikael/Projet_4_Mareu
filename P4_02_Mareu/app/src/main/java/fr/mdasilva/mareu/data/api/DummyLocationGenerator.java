@@ -7,7 +7,7 @@ import java.util.List;
 import fr.mdasilva.mareu.R;
 import fr.mdasilva.mareu.data.model.Location;
 
-public abstract class DummyLocationGenerator {
+public class DummyLocationGenerator {
 
     public static List<Location> DUMMY_LOCATION = Arrays.asList(
             new Location(R.color.MARIO, "Mario"),
@@ -22,7 +22,7 @@ public abstract class DummyLocationGenerator {
             new Location(R.color.BOWSER, "Bowser")
     );
 
-    static List<Location> generateLocations() {
+    public static List<Location> generateLocations() {
         return new ArrayList<>(DUMMY_LOCATION);
     }
 
