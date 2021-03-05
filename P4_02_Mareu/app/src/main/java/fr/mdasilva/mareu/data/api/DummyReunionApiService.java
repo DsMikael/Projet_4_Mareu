@@ -13,7 +13,7 @@ import fr.mdasilva.mareu.data.model.Reunion;
  */
 public class DummyReunionApiService implements ReunionApiService{
 
-    private List<Reunion> reunions = DummyReunionGenerator.generateReunions();
+    private final List<Reunion> reunions = DummyReunionGenerator.generateReunions();
     /**
      * {@inheritDoc}
      */

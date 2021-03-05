@@ -25,8 +25,6 @@ public class Reunion implements Serializable {
         this.location = location;
         this.staff = staff;
     }
-
-
     public int getId() {
         return id;
     }

@@ -35,12 +35,9 @@ public class ListReunionActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(ListReunionActivityViewModel.class);
         binding.recyclerview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        binding.addReunion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddReunionActivity.navigate(ListReunionActivity.this);
-             //   Toast.makeText(ListReunionActivity.this, "whaooooo", Toast.LENGTH_LONG).show();
-            }
+        binding.addReunion.setOnClickListener(v -> {
+            AddReunionActivity.navigate(ListReunionActivity.this);
+         //   Toast.makeText(ListReunionActivity.this, "whaooooo", Toast.LENGTH_LONG).show();
         });
 
        observeLoadingState();

@@ -1,28 +1,26 @@
 package fr.mdasilva.mareu.ui.view;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import fr.mdasilva.mareu.data.api.DummyLocationGenerator;
-import fr.mdasilva.mareu.data.api.DummyReunionApiService;
-import fr.mdasilva.mareu.data.api.ReunionApiService;
 import fr.mdasilva.mareu.data.model.Location;
 import fr.mdasilva.mareu.databinding.ActivityAddReunionBinding;
 
@@ -45,26 +43,20 @@ public class AddReunionActivity extends AppCompatActivity {
         }
 
         initSpinner();
+        initDatePicker();
     }
 
     public void initSpinner(){
         List<Location> locations = DummyLocationGenerator.generateLocations();
-        ArrayList<String> nameLocations = new ArrayList<>();
 
-        for (int i = 0; i < locations.size(); i++) {
-            nameLocations.add(locations.get(i).getName());
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameLocations);
+        ArrayAdapter<Location> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locations);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.locationSpinner.setAdapter(adapter);
-        binding.locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+        binding.spinner.setAdapter(adapter);
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Adapter adapter = parent.getAdapter();
-                Location location = (Location) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(),location.getName(),Toast.LENGTH_LONG).show();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -72,13 +64,29 @@ public class AddReunionActivity extends AppCompatActivity {
         });
 
     }
+    public void initDatePicker() {
+        final Calendar myCalendar = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener date = (view, year, month, dayOfMonth) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            binding.datePicker.setText(new SimpleDateFormat("dd/MM/yy", Locale.FRANCE).format(myCalendar.getTime()));
+        };
+        binding.datePicker.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddReunionActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
