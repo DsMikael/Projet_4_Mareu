@@ -16,8 +16,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorAccent"
             android:elevation="4dp"
+            app:titleTextColor="@color/white"
             app:layout_scrollFlags="scroll|enterAlways">
 
         </androidx.appcompat.widget.Toolbar>
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/colorAddBtn"
         android:src="@drawable/ic_reunion_add_white"
         app:tint="@color/white" />
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03A9F4</color>
+    <color name="colorAccent">#03A9F4</color>
     <color name="colorPrimaryDark">#2196F3</color>
-    <color name="colorAccent">#F44336</color>
+    <color name="colorAddBtn">#F44336</color>
     <color name="colorText">#606060</color>
     <color name="colorTextTitle">#CC000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -18,4 +18,7 @@
     <color name="BOO">#EBF7FF</color>
     <color name="WARIO">#BCC8FF</color>
     <color name="BOWSER">#FF9371</color>
+
+
+
 </resources>

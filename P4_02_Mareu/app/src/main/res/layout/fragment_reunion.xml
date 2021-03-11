@@ -38,7 +38,8 @@
             android:textStyle="bold"
             android:textSize="18sp"
             tools:ignore="MissingConstraints"
-            tools:text="Réunion A - 14h00 - Peach" />
+            tools:text="Réunion A - 14h00 - Peach"
+            android:textColor="@color/colorText"/>
 
         <TextView
             android:id="@+id/item_list_recipient"
@@ -47,6 +48,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             tools:ignore="MissingConstraints"
+            android:textColor="@color/colorTextTitle"
             tools:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" />
 
     </LinearLayout>
