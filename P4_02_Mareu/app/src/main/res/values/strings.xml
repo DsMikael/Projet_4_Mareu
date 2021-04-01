@@ -4,4 +4,9 @@
     <string name="delete">delete</string>
     <string name="location">%1$s - %2$s - %3$s</string>
     <string name="btn_check_register">Ajouté la réunion</string>
+    <string name="participant">Participant</string>
+    <string name="salle">Salle</string>
+    <string name="objet">Objet</string>
+    <string name="start_reunion">Début de la réuinion</string>
+    <string name="end_reunion">Fin de la réuinion</string>
 </resources>

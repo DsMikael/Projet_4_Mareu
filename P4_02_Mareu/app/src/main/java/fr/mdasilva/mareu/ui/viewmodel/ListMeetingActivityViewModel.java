@@ -7,21 +7,21 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import fr.mdasilva.mareu.data.api.DummyReunionApiService;
+import fr.mdasilva.mareu.data.api.DummyMeetingApiService;
 import fr.mdasilva.mareu.data.model.LoadingState;
 
-import fr.mdasilva.mareu.data.model.Reunion;
+import fr.mdasilva.mareu.data.model.Meeting;
 
-public class ListReunionActivityViewModel extends ViewModel {
+public class ListMeetingActivityViewModel extends ViewModel {
 
-    public MutableLiveData<List<Reunion>> reunions = new MutableLiveData<>();
+    public MutableLiveData<List<Meeting>> meetings = new MutableLiveData<>();
 
     public MutableLiveData<LoadingState> loadingState = new MutableLiveData<>(LoadingState.Loading);
 
-    public ListReunionActivityViewModel() {
+    public ListMeetingActivityViewModel() {
         loadingState.postValue(LoadingState.Loading);
         new Handler().postDelayed(() -> {
-            reunions.postValue(new DummyReunionApiService().getReunion());
+            meetings.postValue(new DummyMeetingApiService().getMeeting());
             loadingState.postValue(LoadingState.Loaded);
         }, 2000);
 

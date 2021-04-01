@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.AddReunionActivity">
+    tools:context=".ui.view.AddMeetingActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -27,66 +27,49 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/form_subject_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Objet">
+            android:hint="@string/objet"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="20">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/form_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/colorText"/>
+                android:textColor="@color/colorText"
+                android:maxLength="20"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:hint="Salle">
+            android:layout_marginTop="@dimen/text_margin"
+            android:id="@+id/spinner_layout"
+            app:errorEnabled="true"
+            android:hint="@string/salle">
 
             <AutoCompleteTextView
                 android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:textStyle="bold"
+                style="@style/Theme.Mareu.field"
                 android:inputType="none"
-                android:padding="16dp"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:focusable="true"
-            android:hint="Date">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/date_picker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/colorText"
-                android:focusable="false"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:textStyle="bold"
-                />
+                tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,24 +77,26 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:baselineAligned="false"
+            android:id="@+id/time_picker_layout"
+            app:errorEnabled="true">
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:layout_marginEnd="4dp"
-                android:hint="Heure début">
+                android:layout_marginEnd="@dimen/text_margin"
+                android:id="@+id/time_picker_start_layout"
+                android:hint="@string/start_reunion"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/time_picker_start"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    style="@style/Theme.Mareu.field"
                     android:focusable="false"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
-                    android:textColor="@color/colorText"
-                    android:textStyle="bold" />
+                    android:paddingTop="@dimen/fab_margin"
+                    android:paddingBottom="@dimen/fab_margin"
+                    android:inputType="time"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -119,18 +104,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:layout_marginStart="4dp"
-                android:hint="Heure de Fin">
+                android:layout_marginStart="@dimen/text_margin"
+                android:id="@+id/time_picker_end_layout"
+                android:hint="@string/end_reunion"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/time_picker_end"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:focusable="false"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
-                    android:textColor="@color/colorText"
-                    android:textStyle="bold" />
+                    style="@style/Theme.Mareu.field"
+                    android:paddingTop="@dimen/fab_margin"
+                    android:paddingBottom="@dimen/fab_margin"
+                    android:inputType="time"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -138,40 +123,32 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:hint="Participant"
+            android:layout_marginTop="@dimen/text_margin"
+            android:hint="@string/participant"
             app:endIconMode="custom"
             app:endIconDrawable="@drawable/ic_add"
-            android:drawableTint="@color/colorAccent"
-            android:id="@+id/add_contributor">
+            android:id="@+id/add_contributor"
+            app:errorEnabled="true">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F3EEEE" />
+                />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/form_subject2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/colorText"
-                android:maxLines="1"
-                android:lines="1"
+                style="@style/Theme.Mareu.field"
                 android:inputType="textEmailAddress"
                 android:imeOptions="actionDone"/>
-
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/containedButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/Theme.Mareu.field"
             android:text="@string/btn_check_register"
-            android:textStyle="bold"
-            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
             />
     </LinearLayout>
 

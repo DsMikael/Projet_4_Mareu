@@ -10,6 +10,6 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.view.ListReunionActivity"
-    tools:listitem="@layout/fragment_reunion">
+    tools:listitem="@layout/fragment_meeting">
 
 </androidx.recyclerview.widget.RecyclerView>

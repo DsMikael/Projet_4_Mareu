@@ -1,44 +1,48 @@
 package fr.mdasilva.mareu.data.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import org.joda.time.DateTime;
 
-public class Reunion implements Serializable {
+public class Meeting implements Serializable {
 
-    private int id;
-    private DateTime date;
+    private DateTime dateStart;
+    private DateTime dateEnd;
     private String subject;
     private Location location;
     private String staff;
 
     /**
      * Constructor
-     * @param id
-     * @param date
+     *  @param dateStart
+     * @param dateEnd
      * @param subject
      * @param location
+     * @param staff
      */
-    public Reunion(int id, DateTime date, String subject, Location location, String staff){
-        this.id = id;
-        this.date = date;
+    public Meeting(DateTime dateStart, DateTime dateEnd, String subject, Location location, String staff) {
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
         this.subject = subject;
         this.location = location;
         this.staff = staff;
     }
-    public int getId() {
-        return id;
+
+    public DateTime getDateStart() {
+        return dateStart;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDateStart(DateTime dateStart) {
+        this.dateStart = dateStart;
     }
 
-    public DateTime getDate() {
-        return date;
+    public DateTime getDateEnd() {
+        return dateEnd;
     }
 
-    public void setDate(DateTime date) {
-        this.date = date;
+    public void setDateEnd(DateTime dateEnd) {
+        this.dateEnd = dateStart;
     }
 
     public String getSubject() {
@@ -67,12 +71,7 @@ public class Reunion implements Serializable {
 
     @Override
     public String toString() {
-        return "Reunion{" +
-                "id=" + id +
-                ", date=" + date +
-                ", subject='" + subject + '\'' +
-                ", location='" + location + '\'' +
-                ", staff=" + staff +
-                '}';
+        return "Meeting{" + "dateStart=" + dateStart + ", dateEnd=" + dateStart + ", subject='" + subject + '\'' + ", location='" + location
+                + '\'' + ", staff=" + staff + '}';
     }
 }
