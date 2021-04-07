@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -27,12 +27,14 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import fr.mdasilva.mareu.data.api.DummyLocationApiService;
+import fr.mdasilva.mareu.data.api.LocationApiService;
 import fr.mdasilva.mareu.data.model.Location;
 import fr.mdasilva.mareu.databinding.ActivityAddMeetingBinding;
 import fr.mdasilva.mareu.ui.viewmodel.AddMeetingActivityViewModel;
+import timber.log.Timber;
 
 public class AddMeetingActivity extends AppCompatActivity {
 
@@ -54,13 +56,14 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(AddMeetingActivityViewModel.class);
 
+
         initSpinner();
         initDateTimePicker();
 
         binding.addContributor.setEndIconOnClickListener(v -> {
             try {
                 initChipsEdit();
-            } catch (AddMeetingActivityViewModel.FieldEmailException e) {
+            } catch (AddMeetingActivityViewModel.ContributorEmailException e) {
                 e.printStackTrace();
             }
         });
@@ -68,31 +71,50 @@ public class AddMeetingActivity extends AppCompatActivity {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 try {
                     initChipsEdit();
-                } catch (AddMeetingActivityViewModel.FieldEmailException e) {
+                } catch (AddMeetingActivityViewModel.ContributorEmailException e) {
                     e.printStackTrace();
                 }
             }
             return true;
         });
         binding.containedButton.setOnClickListener(v -> {
+
+            binding.formSubjectLayout.setError(null);
+            binding.timePickerStartLayout.setError(null);
+            binding.timePickerEndLayout.setError(null);
+            binding.addContributor.setError(null);
+
             ArrayList<String> chipGroupList = new ArrayList<>();
             for (int i=0; i< binding.chipGroup.getChildCount(); i++){
                 Chip chip = (Chip) binding.chipGroup.getChildAt(i);
                 chipGroupList.add(i,chip.getText().toString());
             }
-           try {
-
+            try {
                 viewModel.validateForm( binding.timePickerStart.getText().toString(),
                         binding.timePickerEnd.getText().toString(), binding.formSubject.getText().toString(),
                         binding.spinner.getText().toString(),
                         chipGroupList);
-            } catch (AddMeetingActivityViewModel.DateInvalidException | AddMeetingActivityViewModel.FieldEmptyException e) {
-                e.printStackTrace();
+            }catch (AddMeetingActivityViewModel.SubjectFieldException e) {
+                binding.formSubjectLayout.setError(e.getMessage());
+            } catch (AddMeetingActivityViewModel.DateFieldEmptyException e) {
+                binding.timePickerStartLayout.setError(e.getMessage());
+            } catch (AddMeetingActivityViewModel.DateEndFieldEmptyException | AddMeetingActivityViewModel.DateEndInvalidException e) {
+                binding.timePickerEndLayout.setError(e.getMessage());
+            } catch (AddMeetingActivityViewModel.ContributorEmptyException e) {
+                binding.addContributor.setError(e.getMessage());
+            } catch (AddMeetingActivityViewModel.SpinnerFieldException e) {
+                binding.spinnerLayout.setError(e.getMessage());
+            } catch (AddMeetingActivityViewModel.MeetingExistException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
+            finish();
         });
+
+
         binding.formSubject2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                binding.addContributor.setError(null);
             }
 
             @Override
@@ -103,6 +125,8 @@ public class AddMeetingActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
+
     }
 
     public void initSpinner() {
@@ -114,12 +138,14 @@ public class AddMeetingActivity extends AppCompatActivity {
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
     }
 
     public void initDateTimePicker() {
@@ -159,16 +185,18 @@ public class AddMeetingActivity extends AppCompatActivity {
         });
     }
 
-    private void initChipsEdit() throws AddMeetingActivityViewModel.FieldEmailException {
+    private void initChipsEdit() throws AddMeetingActivityViewModel.ContributorEmailException {
         String chipText = binding.formSubject2.getText().toString().trim();
         if (!TextUtils.isEmpty(chipText)) {
             Chip chip = new Chip(AddMeetingActivity.this);
             chip.setText(chipText);
             chip.setCloseIconVisible(true);
-            // TODO Faire la verification dans le viewModel
-            viewModel.checkIsEmail(chipText);
+            try {
+                viewModel.checkIsEmail(chipText);
+            }catch (AddMeetingActivityViewModel.ContributorEmailException e){
+                binding.addContributor.setError(e.getMessage());
+            }
             binding.chipGroup.addView(chip);
-            //binding.chipGroup.addView(chip,binding.chipGroup.getChildCount());
             binding.formSubject2.setText("");
             chip.setOnCloseIconClickListener(v -> binding.chipGroup.removeView(chip));
         }

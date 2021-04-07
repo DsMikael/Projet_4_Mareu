@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import fr.mdasilva.mareu.R;
+import fr.mdasilva.mareu.data.api.MeetingApiService;
+import fr.mdasilva.mareu.data.api.di.DI;
 import fr.mdasilva.mareu.data.model.Meeting;
 import fr.mdasilva.mareu.databinding.FragmentMeetingBinding;
 
@@ -42,6 +44,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     public static final class ViewHolder extends RecyclerView.ViewHolder {
 
         private final FragmentMeetingBinding binding;
+        protected MeetingApiService sMeetingApi = DI.getMeetingApiService();
 
         public ViewHolder(FragmentMeetingBinding binding) {
             super(binding.getRoot());
@@ -57,6 +60,8 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
 
             itemView.setOnClickListener(
                     v -> Toast.makeText(v.getContext(), meeting.toString(), Toast.LENGTH_SHORT).show());
+
+            binding.itemListDeleteButton.setOnClickListener(v -> sMeetingApi.deleteMeeting(meeting));
         }
 
     }

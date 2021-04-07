@@ -43,6 +43,7 @@ public class ListMeetingActivity extends AppCompatActivity {
 
         observeLoadingState();
         observeMeetings();
+
     }
 
     private void observeMeetings() {

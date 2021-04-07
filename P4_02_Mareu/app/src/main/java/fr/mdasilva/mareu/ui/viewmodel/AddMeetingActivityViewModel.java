@@ -1,7 +1,6 @@
 package fr.mdasilva.mareu.ui.viewmodel;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 
 import androidx.lifecycle.ViewModel;
@@ -12,104 +11,106 @@ import org.joda.time.format.DateTimeFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.mdasilva.mareu.data.api.DummyLocationGenerator;
+import fr.mdasilva.mareu.data.api.di.DI;
+import fr.mdasilva.mareu.data.api.LocationApiService;
 import fr.mdasilva.mareu.data.api.MeetingApiService;
 import fr.mdasilva.mareu.data.model.Location;
+import fr.mdasilva.mareu.data.model.Meeting;
+import timber.log.Timber;
 
 public class AddMeetingActivityViewModel extends ViewModel {
 
-    public MeetingApiService smeetingApi ;
+    public MeetingApiService sMeetingApi = DI.getMeetingApiService();
+    public LocationApiService sLocationApi = DI.getLocationApiService();
 
-    public void validateForm(String dateStart, String dateEnd, String subject, String location, ArrayList contributor)
-            throws FieldEmptyException, DateInvalidException {
-       List<Location> mLocation =  generateLocations();
-        Log.i("AHHHHHHHH",subject + " " +
-                location + " " +
-                mLocation  + " " +
+    public void validateForm(String dateStart, String dateEnd, String subject, String location, ArrayList<String> contributor)
+            throws DateEndInvalidException, SubjectFieldException, ContributorEmptyException, DateFieldEmptyException, DateEndFieldEmptyException, SpinnerFieldException, MeetingExistException {
+
+       Location mLocation = generateLocations().get(positionLocation(location));
+
+        if (TextUtils.isEmpty(subject)) {
+            throw new SubjectFieldException();
+        }
+        if (TextUtils.isEmpty(location)) {
+            throw new SpinnerFieldException();
+        }
+        if (TextUtils.isEmpty(dateStart)) {
+            throw new DateFieldEmptyException();
+        }
+        if (TextUtils.isEmpty(dateEnd)) {
+            throw new DateEndFieldEmptyException();
+        }
+        if(contributor.size() == 0 ){
+            throw new ContributorEmptyException();
+        }
+
+        DateTime mdateStart = DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateStart);
+        DateTime mdateEnd = DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateEnd);
+
+        if (mdateStart.isAfter(mdateEnd)) {
+            throw new DateEndInvalidException();
+        }
+        if(checkMeetingExist(mdateStart, mdateEnd, mLocation)){
+            throw new MeetingExistException();
+        }
+        sMeetingApi.createMeeting(new Meeting(mdateStart, mdateEnd, subject, mLocation, contributor.toString()));
+
+        Timber.d(subject + " " +
+                mLocation + " " +
                 dateStart + " " +
                 dateEnd + " " +
                 contributor.toString());
 
-        if (checkIsEmpty(subject)
-                && checkContributor(contributor) && checkDateIsValid(dateStart, dateEnd)){
-
-            // TODO verifier si la meeting existe checkMeetingExist
-            // sinon Ajouter la reunion
-/*
-          smeetingApi.createMeeting(new Meeting(DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateStart),
-                    DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateEnd),
-                    subject,
-                    mLocation,
-                    contributor.toString()));
-*/
-        }
+        Timber.d(sMeetingApi.getMeeting().toString());
 
     }
 
-    private boolean checkIsEmpty(String checkFieldEmpty) throws FieldEmptyException {
-        if (TextUtils.isEmpty(checkFieldEmpty)) throw new FieldEmptyException();
-
-        return true;
+    public void checkIsEmail(String checkFieldEmpty) throws ContributorEmailException{
+        if (!Patterns.EMAIL_ADDRESS.matcher(checkFieldEmpty).matches()) {throw new ContributorEmailException(); }
     }
 
-    public void checkIsEmail(String checkFieldEmpty) throws FieldEmailException{
-        if (!Patterns.EMAIL_ADDRESS.matcher(checkFieldEmpty).matches()) {
-            throw new FieldEmailException();
-        }
-    }
-
-    private boolean checkContributor(ArrayList contributor) throws FieldEmptyException {
-
-        if(contributor.size() == 0 ){
-            throw new FieldEmptyException();
-        }
-        // TODO verifier si la chaque éléments de la liste est un email
-        return true;
-    }
-
-    private boolean checkDateIsValid(String dateStart, String dateEnd) throws FieldEmptyException, DateInvalidException {
-  /*      if (checkIsEmpty(dateStart) && checkIsEmpty(dateEnd)) {
-            throw new FieldEmptyException();
-        }*/
-        DateTime mdateStart = DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateStart);
-        DateTime mdateEnd = DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateEnd);
-        if (mdateStart.isBefore(mdateEnd)) {
-            throw new DateInvalidException();
-        }
-        return true;
-    }
-
-    private boolean checkMeetingExist() throws MeetingExisteException {
+    private boolean checkMeetingExist(DateTime mdateStart, DateTime mdateEnd, Location location)
+            throws MeetingExistException {
         // TODO verifier si la meeting existe comparer si une meetings est deja creer
-        throw new MeetingExisteException();
+        throw new MeetingExistException();
     }
-
 
     public List<Location> generateLocations() {
-        return DummyLocationGenerator.generateLocations();
+        return sLocationApi.getLocation();
     }
 
-    public static class FieldEmptyException extends Exception {
-        public FieldEmptyException() {
-            super("Un champ est vide.");
+    public int positionLocation(String location) {
+        int i = 0;
+        for(Location c : generateLocations()){
+            if(c.getName().equals(location)){ break;}
+            i++;
         }
+        return i;
     }
 
-    public static class DateInvalidException extends Exception {
-        public DateInvalidException() {
-            super("La date de fin ne peut etre anterieur");
-        }
+    //Exception List
+    public static class SubjectFieldException extends Exception {
+        public SubjectFieldException() { super("Ce champs ne peut etre vide."); }
     }
-
-    public static class MeetingExisteException extends Exception {
-        public MeetingExisteException() {
-            super("Une réunion exite déja dans la salle à cette période");
-        }
+    public static class DateFieldEmptyException extends Exception {
+        public DateFieldEmptyException() { super("Ce champs ne peut etre vide."); }
     }
-
-    public static class FieldEmailException extends Exception {
-        public FieldEmailException() {
-            super("L'adresse email est invalide");
-        }
+    public static class DateEndFieldEmptyException extends Exception {
+        public DateEndFieldEmptyException() { super("Ce champs ne peut etre vide."); }
+    }
+    public static class SpinnerFieldException extends Exception {
+        public SpinnerFieldException() { super("Vous devez choisir une salle.");}
+    }
+    public static class DateEndInvalidException extends Exception {
+        public DateEndInvalidException() { super("La date/ l'heure de fin ne peut etre anterieur au debut de la réunion."); }
+    }
+    public static class ContributorEmailException extends Exception {
+        public ContributorEmailException() {super("L'adresse email est invalide");}
+    }
+    public static class ContributorEmptyException extends Exception {
+        public ContributorEmptyException() { super("Il doit y avoir au minimun 1 participant.");}
+    }
+    public static class MeetingExistException extends Exception {
+        public MeetingExistException() { super("Une réunion exite déja dans la salle à cette période");}
     }
 }
