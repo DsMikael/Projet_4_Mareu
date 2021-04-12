@@ -94,6 +94,8 @@ public class AddMeetingActivity extends AppCompatActivity {
                         binding.timePickerEnd.getText().toString(), binding.formSubject.getText().toString(),
                         binding.spinner.getText().toString(),
                         chipGroupList);
+
+            //    finish();
             }catch (AddMeetingActivityViewModel.SubjectFieldException e) {
                 binding.formSubjectLayout.setError(e.getMessage());
             } catch (AddMeetingActivityViewModel.DateFieldEmptyException e) {
@@ -107,7 +109,6 @@ public class AddMeetingActivity extends AppCompatActivity {
             } catch (AddMeetingActivityViewModel.MeetingExistException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-            finish();
         });
 
 

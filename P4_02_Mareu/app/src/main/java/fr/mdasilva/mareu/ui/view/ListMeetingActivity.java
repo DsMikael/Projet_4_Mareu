@@ -15,7 +15,6 @@ import fr.mdasilva.mareu.R;
 import fr.mdasilva.mareu.databinding.ActivityListMeetingBinding;
 import fr.mdasilva.mareu.ui.adapter.MyMeetingRecyclerViewAdapter;
 import fr.mdasilva.mareu.ui.viewmodel.ListMeetingActivityViewModel;
-import fr.mdasilva.mareu.data.model.LoadingState;
 
 public class ListMeetingActivity extends AppCompatActivity {
 
@@ -40,8 +39,6 @@ public class ListMeetingActivity extends AppCompatActivity {
             // Toast.makeText(ListMeetingActivity.this, "whaooooo",
             // Toast.LENGTH_LONG).show();
         });
-
-        observeLoadingState();
         observeMeetings();
 
     }
@@ -51,15 +48,6 @@ public class ListMeetingActivity extends AppCompatActivity {
                 meetings -> binding.recyclerview.setAdapter(new MyMeetingRecyclerViewAdapter(meetings)));
     }
 
-    private void observeLoadingState() {
-        viewModel.loadingState.observe(this, loadingState -> {
-            if (loadingState == LoadingState.Loading) {
-                binding.loaderContainer.setVisibility(View.VISIBLE);
-            } else {
-                binding.loaderContainer.setVisibility(View.INVISIBLE);
-            }
-        });
-    }
 
     @Override
     protected void onResume() {

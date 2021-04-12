@@ -26,8 +26,7 @@ public class AddMeetingActivityViewModel extends ViewModel {
     public void validateForm(String dateStart, String dateEnd, String subject, String location, ArrayList<String> contributor)
             throws DateEndInvalidException, SubjectFieldException, ContributorEmptyException, DateFieldEmptyException, DateEndFieldEmptyException, SpinnerFieldException, MeetingExistException {
 
-       Location mLocation = generateLocations().get(positionLocation(location));
-
+ //      Location mLocation = generateLocations().get(positionLocation(location));
         if (TextUtils.isEmpty(subject)) {
             throw new SubjectFieldException();
         }
@@ -50,18 +49,24 @@ public class AddMeetingActivityViewModel extends ViewModel {
         if (mdateStart.isAfter(mdateEnd)) {
             throw new DateEndInvalidException();
         }
-        if(checkMeetingExist(mdateStart, mdateEnd, mLocation)){
+  /*      if(checkMeetingExist(mdateStart, mdateEnd, mLocation)){
             throw new MeetingExistException();
         }
-        sMeetingApi.createMeeting(new Meeting(mdateStart, mdateEnd, subject, mLocation, contributor.toString()));
 
+
+        sMeetingApi.createMeeting(new Meeting(mdateStart,
+                mdateEnd,
+                subject,
+                mLocation,
+                contributor.toString()));
+*/
         Timber.d(subject + " " +
-                mLocation + " " +
+                positionLocation(location) + " " +
                 dateStart + " " +
                 dateEnd + " " +
                 contributor.toString());
 
-        Timber.d(sMeetingApi.getMeeting().toString());
+  //      Timber.d(sMeetingApi.getMeeting().toString());
 
     }
 

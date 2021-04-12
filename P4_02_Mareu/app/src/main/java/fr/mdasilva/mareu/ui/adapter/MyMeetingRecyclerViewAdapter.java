@@ -18,6 +18,7 @@ import java.util.List;
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.ViewHolder> {
 
     private final List<Meeting> mMeetings;
+    protected MeetingApiService sApiMeeting;
 
     public MyMeetingRecyclerViewAdapter(List<Meeting> items) {
         mMeetings = items;
@@ -61,8 +62,10 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
             itemView.setOnClickListener(
                     v -> Toast.makeText(v.getContext(), meeting.toString(), Toast.LENGTH_SHORT).show());
 
-            binding.itemListDeleteButton.setOnClickListener(v -> sMeetingApi.deleteMeeting(meeting));
+ //           binding.itemListDeleteButton.setOnClickListener(v -> sMeetingApi.deleteMeeting(meeting));
         }
 
+
     }
+
 }
