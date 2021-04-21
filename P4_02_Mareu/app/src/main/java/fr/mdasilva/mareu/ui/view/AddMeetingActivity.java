@@ -1,8 +1,8 @@
 package fr.mdasilva.mareu.ui.view;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,11 +29,10 @@ import org.joda.time.format.DateTimeFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.mdasilva.mareu.data.api.DummyLocationApiService;
-import fr.mdasilva.mareu.data.api.LocationApiService;
 import fr.mdasilva.mareu.data.model.Location;
+import fr.mdasilva.mareu.data.model.Meeting;
 import fr.mdasilva.mareu.databinding.ActivityAddMeetingBinding;
-import fr.mdasilva.mareu.ui.viewmodel.AddMeetingActivityViewModel;
+import fr.mdasilva.mareu.ui.viewModel.AddMeetingActivityViewModel;
 import timber.log.Timber;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -54,8 +53,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        viewModel = new ViewModelProvider(this).get(AddMeetingActivityViewModel.class);
-
+        viewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(AddMeetingActivityViewModel.class);
 
         initSpinner();
         initDateTimePicker();
@@ -94,40 +92,35 @@ public class AddMeetingActivity extends AppCompatActivity {
                         binding.timePickerEnd.getText().toString(), binding.formSubject.getText().toString(),
                         binding.spinner.getText().toString(),
                         chipGroupList);
-
-            //    finish();
+                setResult(Activity.RESULT_OK);
+                finish();
             }catch (AddMeetingActivityViewModel.SubjectFieldException e) {
-                binding.formSubjectLayout.setError(e.getMessage());
+                binding.formSubjectLayout.setError(viewModel.getErrorMessage(e));
             } catch (AddMeetingActivityViewModel.DateFieldEmptyException e) {
-                binding.timePickerStartLayout.setError(e.getMessage());
+                binding.timePickerStartLayout.setError(viewModel.getErrorMessage(e));
             } catch (AddMeetingActivityViewModel.DateEndFieldEmptyException | AddMeetingActivityViewModel.DateEndInvalidException e) {
-                binding.timePickerEndLayout.setError(e.getMessage());
+                binding.timePickerEndLayout.setError(viewModel.getErrorMessage(e));
             } catch (AddMeetingActivityViewModel.ContributorEmptyException e) {
-                binding.addContributor.setError(e.getMessage());
+                binding.addContributor.setError(viewModel.getErrorMessage(e));
             } catch (AddMeetingActivityViewModel.SpinnerFieldException e) {
-                binding.spinnerLayout.setError(e.getMessage());
+                binding.spinnerLayout.setError(viewModel.getErrorMessage(e));
             } catch (AddMeetingActivityViewModel.MeetingExistException e) {
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, viewModel.getErrorMessage(e), Toast.LENGTH_SHORT).show();
             }
         });
-
 
         binding.formSubject2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 binding.addContributor.setError(null);
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
-
-
     }
 
     public void initSpinner() {
@@ -139,14 +132,11 @@ public class AddMeetingActivity extends AppCompatActivity {
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
     }
 
     public void initDateTimePicker() {
@@ -195,7 +185,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             try {
                 viewModel.checkIsEmail(chipText);
             }catch (AddMeetingActivityViewModel.ContributorEmailException e){
-                binding.addContributor.setError(e.getMessage());
+                binding.addContributor.setError(viewModel.getErrorMessage(e));
             }
             binding.chipGroup.addView(chip);
             binding.formSubject2.setText("");
@@ -212,8 +202,8 @@ public class AddMeetingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void navigate(Context context) {
+    public static void navigate(Activity context,int requestCode) {
         Intent intent = new Intent(context, AddMeetingActivity.class);
-        ActivityCompat.startActivity(context, intent, null);
+        ActivityCompat.startActivityForResult(context,  intent, requestCode ,null);
     }
 }

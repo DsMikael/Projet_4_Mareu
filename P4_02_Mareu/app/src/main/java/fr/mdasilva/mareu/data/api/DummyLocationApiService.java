@@ -34,4 +34,15 @@ public class DummyLocationApiService implements LocationApiService {
     public void createLocation(Location location) {
         locations.add(location);
     }
+
+    @Override
+    public Location findLocationByName(String location) {
+        for (Location location1 : locations) {
+            if(location1.getName().equals(location)){
+                return location1;
+            }
+        }
+        return null;
+    }
+
 }

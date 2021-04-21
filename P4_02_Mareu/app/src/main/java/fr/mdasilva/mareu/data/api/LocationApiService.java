@@ -29,4 +29,6 @@ import fr.mdasilva.mareu.data.model.Location;
          * @param location
          */
         void createLocation(Location location);
-}
+
+        Location findLocationByName(String location);
+    }

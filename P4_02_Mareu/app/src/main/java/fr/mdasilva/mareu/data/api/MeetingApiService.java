@@ -1,8 +1,9 @@
 package fr.mdasilva.mareu.data.api;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
-import fr.mdasilva.mareu.data.model.Location;
 import fr.mdasilva.mareu.data.model.Meeting;
 
 /**
@@ -31,5 +32,5 @@ public interface MeetingApiService {
      */
     void createMeeting(Meeting meeting);
 
-
+    boolean findMeeting(String location, DateTime dateStart, DateTime dateEnd);
 }
