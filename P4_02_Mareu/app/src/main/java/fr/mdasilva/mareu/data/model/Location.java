@@ -1,5 +1,7 @@
 package fr.mdasilva.mareu.data.model;
 
+import android.text.TextUtils;
+
 import androidx.annotation.ColorRes;
 
 public class Location {
@@ -39,4 +41,5 @@ public class Location {
     public String toString() {
         return name;
     }
+
 }

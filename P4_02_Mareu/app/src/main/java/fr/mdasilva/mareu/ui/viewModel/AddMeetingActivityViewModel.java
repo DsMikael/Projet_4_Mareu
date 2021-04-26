@@ -19,7 +19,6 @@ import fr.mdasilva.mareu.data.api.LocationApiService;
 import fr.mdasilva.mareu.data.api.MeetingApiService;
 import fr.mdasilva.mareu.data.model.Location;
 import fr.mdasilva.mareu.data.model.Meeting;
-import timber.log.Timber;
 
 public class AddMeetingActivityViewModel extends AndroidViewModel {
 
@@ -62,7 +61,7 @@ public class AddMeetingActivityViewModel extends AndroidViewModel {
                 mdateEnd,
                 subject,
                 sLocationApi.findLocationByName(location),
-                contributor.toString().replaceAll("\\[|\\]", "").replaceAll(", ",", ")));
+                contributor));
     }
 
     public void checkIsEmail(String checkFieldEmpty) throws ContributorEmailException{

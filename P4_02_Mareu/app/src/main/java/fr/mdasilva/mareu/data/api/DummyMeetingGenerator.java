@@ -10,25 +10,25 @@ import fr.mdasilva.mareu.data.model.Meeting;
 
 public abstract class DummyMeetingGenerator {
 
-        public static List<Meeting> DUMMY_REUNIONS;
+        public static List<Meeting> DUMMY_MEETINGS;
 
         static {
-                DUMMY_REUNIONS = Arrays.asList(
+                DUMMY_MEETINGS = Arrays.asList(
                         new Meeting(new DateTime(2021, 4, 20, 14, 0, 0),
                                 new DateTime(2021, 4, 21, 14, 0, 0), "Meeting A",
                                 DummyLocationGenerator.generateLocations().get(6),
-                               "maxime@lamzone.com, alex@lamzone.com"),
+                               Arrays.asList("maxime@lamzone.com", "alex@lamzone.com")),
                         new Meeting(new DateTime(2021, 4, 20, 15, 15, 0),
-                                new DateTime(2021, 4, 25, 15, 30, 0), "Meeting B",
+                                new DateTime(2021, 4, 28, 15, 30, 0), "Meeting B",
                                 DummyLocationGenerator.generateLocations().get(0),
-                                "paul@lamzone.com, viviane@lamzone.com"),
+                                Arrays.asList("paul@lamzone.com", "viviane@lamzone.com")),
                         new Meeting(new DateTime(2021, 4, 21, 10, 30, 0),
-                                new DateTime(2021, 4, 22, 10, 30, 0), "Meeting C",
+                                new DateTime(2021, 4, 30, 10, 30, 0), "Meeting C",
                                 DummyLocationGenerator.generateLocations().get(1),
-                                "amandine@lamzone.com, luc@lamzone.com"));
+                                Arrays.asList("amandine@lamzone.com", "luc@lamzone.com")));
         }
 
         static List<Meeting> generateMeetings() {
-                return new ArrayList<>(DUMMY_REUNIONS);
+                return new ArrayList<>(DUMMY_MEETINGS);
         }
 }

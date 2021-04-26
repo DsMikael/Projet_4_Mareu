@@ -53,6 +53,7 @@ dependencies {
 
     // UNIT TEST
     testImplementation 'junit:junit:4.+'
+    testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
 
     // INSTRUMENTATION TEST
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

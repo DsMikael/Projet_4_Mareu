@@ -1,0 +1,23 @@
+<resources>
+    <string name="add_name_toolbar">Ajout d\'une Réunion</string>
+    <string name="delete">delete</string>
+    <string name="btn_check_register">Ajouté la réunion</string>
+    <string name="participant">Participant</string>
+    <string name="salle">Salle</string>
+    <string name="objet">Objet</string>
+    <string name="start_reunion">Début de la réuinion</string>
+    <string name="end_reunion">Fin de la réuinion</string>
+
+    <string name="e_is_empty">Ce champs ne peut etre vide.</string>
+    <string name="e_choose_location">Vous devez choisir une salle.</string>
+    <string name="e_time_before">La date / l\'heure de fin ne peut etre anterieur au debut de la réunion.</string>
+    <string name="e_email_invalid">L\'adresse email est invalide</string>
+    <string name="e_min_contibutor">Il doit y avoir au minimun 1 participant.</string>
+    <string name="e_meeting_exist">Une réunion exite déja dans la salle à cette période.</string>
+
+    <string name="filter_all">Afficher tout</string>
+    <string name="filter_location">Trier par Salle</string>
+    <string name="filter_date">Trier par Date</string>
+    <string name="filter">filtre</string>
+    <string name="a_choose_location">Choix de la Salle</string>
+</resources>

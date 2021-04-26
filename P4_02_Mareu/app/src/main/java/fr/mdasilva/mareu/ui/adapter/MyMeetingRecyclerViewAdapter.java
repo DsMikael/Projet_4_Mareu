@@ -8,15 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import fr.mdasilva.mareu.R;
-import fr.mdasilva.mareu.data.api.MeetingApiService;
-import fr.mdasilva.mareu.data.api.di.DI;
 import fr.mdasilva.mareu.data.event.DeleteMeetingEvent;
 import fr.mdasilva.mareu.data.model.Meeting;
 import fr.mdasilva.mareu.databinding.FragmentMeetingBinding;
-import fr.mdasilva.mareu.ui.viewModel.ListMeetingActivityViewModel;
 
 import java.util.List;
 
@@ -39,7 +35,6 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Meeting meeting = mMeetings.get(position);
         holder.update(meeting);
-
     }
 
     @Override
@@ -61,11 +56,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
                     ContextCompat.getColorStateList(itemView.getContext(), meeting.getLocation().getColor()));
             binding.itemListLocation.setText(itemView.getContext().getString(R.string.location, meeting.getSubject(),
                     meeting.getDateStart().toString("HH:mm"), meeting.getLocation().getName()));
-            binding.itemListRecipient.setText(meeting.getStaff());
-
-            itemView.setOnClickListener(
-                    v -> Toast.makeText(v.getContext(), meeting.toString(), Toast.LENGTH_SHORT).show());
-
+            binding.itemListRecipient.setText(meeting.getStafftoString());
             binding.itemListDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteMeetingEvent(meeting)));
         }
 

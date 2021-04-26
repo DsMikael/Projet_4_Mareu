@@ -33,4 +33,8 @@ public interface MeetingApiService {
     void createMeeting(Meeting meeting);
 
     boolean findMeeting(String location, DateTime dateStart, DateTime dateEnd);
+
+    List<Meeting> getFilterDateMeetings(DateTime dateTime);
+
+    List<Meeting> getFilterLocationMeetings(String location);
 }

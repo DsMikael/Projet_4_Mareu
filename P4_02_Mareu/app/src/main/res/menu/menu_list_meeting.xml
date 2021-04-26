@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/filter"
         android:icon="@drawable/ic_filter"
-        android:title="Filter"
+        android:title="@string/filter"
         app:showAsAction="always">
         <menu>
-            <item android:title="Trier par Date"
+            <item android:title="@string/filter_all"
+                android:id="@+id/filter_all"/>
+            <item android:title="@string/filter_date"
                 android:id="@+id/filter_date" />
-            <item android:title="Trier par Salle"
-                android:id="@+id/filter_venue"/>
+            <item android:title="@string/filter_location"
+                android:id="@+id/filter_location"/>
         </menu>
     </item>
 </menu>

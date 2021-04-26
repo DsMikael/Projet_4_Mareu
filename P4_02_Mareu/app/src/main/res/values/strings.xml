@@ -1,19 +1,25 @@
 <resources>
-    <string name="app_name">Ma réu</string>
-    <string name="add_name_toolbar">Ajout d\'une Réunion</string>
+    <string name="app_name" translatable="false">Ma réu</string>
+    <string name="add_name_toolbar">Adding Meeting</string>
     <string name="delete">delete</string>
-    <string name="location">%1$s - %2$s - %3$s</string>
-    <string name="btn_check_register">Ajouté la réunion</string>
-    <string name="participant">Participant</string>
-    <string name="salle">Salle</string>
-    <string name="objet">Objet</string>
-    <string name="start_reunion">Début de la réuinion</string>
-    <string name="end_reunion">Fin de la réuinion</string>
+    <string name="location" translatable="false">%1$s - %2$s - %3$s</string>
+    <string name="btn_check_register">Adding Meeting</string>
+    <string name="participant">Contributor</string>
+    <string name="salle">Room</string>
+    <string name="objet">Object</string>
+    <string name="start_reunion">Start meeting</string>
+    <string name="end_reunion">End meeting</string>
 
-    <string name="e_is_empty">Ce champs ne peut etre vide.</string>
-    <string name="e_choose_location">Vous devez choisir une salle.</string>
-    <string name="e_time_before">La date / l\'heure de fin ne peut etre anterieur au debut de la réunion.</string>
-    <string name="e_email_invalid">L\'adresse email est invalide</string>
-    <string name="e_min_contibutor">Il doit y avoir au minimun 1 participant.</string>
-    <string name="e_meeting_exist">Une réunion exite déja dans la salle à cette période.</string>
+    <string name="e_is_empty">This field cannot be empty.</string>
+    <string name="e_choose_location">You have to choose a room.</string>
+    <string name="e_time_before">The end date / time cannot be earlier than the start of the meeting.</string>
+    <string name="e_email_invalid">Email address is invalid.</string>
+    <string name="e_min_contibutor">There must be at least 1 contributor.</string>
+    <string name="e_meeting_exist">A meeting is already in the room at this time.</string>
+
+    <string name="filter_all">Display all</string>
+    <string name="filter_location">Sort by Room</string>
+    <string name="filter_date">Sort by Date</string>
+    <string name="filter">Filter</string>
+    <string name="a_choose_location">Choice of Location</string>
 </resources>

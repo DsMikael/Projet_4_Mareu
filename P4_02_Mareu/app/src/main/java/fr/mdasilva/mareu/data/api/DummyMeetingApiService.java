@@ -2,7 +2,9 @@ package fr.mdasilva.mareu.data.api;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
+import org.joda.time.format.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.mdasilva.mareu.data.model.Meeting;
@@ -35,7 +37,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @param meeting
      */
     @Override
@@ -43,17 +45,43 @@ public class DummyMeetingApiService implements MeetingApiService {
         meetings.add(meeting);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
     @Override
     public boolean findMeeting(String location, DateTime dateStart, DateTime dateEnd) {
-        for (Meeting meeting1 : meetings) {
-            if(meeting1.getLocation().getName().equals(location)){
-                Interval meetingInteval = new Interval(meeting1.getDateStart(),meeting1.getDateEnd());
-                if(meetingInteval.contains(dateStart) || meetingInteval.contains(dateEnd)){
-                    Timber.d("date || "+ meeting1.toString());
+        for (Meeting meeting : meetings) {
+            if (meeting.getLocation().getName().equals(location)) {
+                Interval meetingInteval = new Interval(meeting.getDateStart(), meeting.getDateEnd());
+                if (meetingInteval.contains(dateStart) || meetingInteval.contains(dateEnd)) {
                     return true;
                 }
             }
         }
         return false;
     }
+
+    public List<Meeting> getFilterDateMeetings(DateTime dateTime) {
+        List<Meeting> meetingDateList = new ArrayList<>();
+        for (Meeting meeting : meetings) {
+            Interval meetingInteval = new Interval(meeting.getDateStart(), meeting.getDateEnd());
+            if (meetingInteval.contains(dateTime)) {
+                meetingDateList.add(meeting);
+            }
+        }
+        return meetingDateList;
+    }
+
+    public List<Meeting> getFilterLocationMeetings(String location) {
+        List<Meeting> meetingLocationList = new ArrayList<>();
+        for (Meeting meeting : meetings) {
+            if (meeting.getLocation().getName().equals(location)) {
+                meetingLocationList.add(meeting);
+            }
+        }
+        return meetingLocationList;
+    }
+
 }

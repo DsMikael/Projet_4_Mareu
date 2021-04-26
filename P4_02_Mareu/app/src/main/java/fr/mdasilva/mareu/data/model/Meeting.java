@@ -1,6 +1,9 @@
 package fr.mdasilva.mareu.data.model;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -11,7 +14,7 @@ public class Meeting implements Serializable {
     private DateTime dateEnd;
     private String subject;
     private Location location;
-    private String staff;
+    private List<String> staff;
 
     /**
      * Constructor
@@ -21,7 +24,7 @@ public class Meeting implements Serializable {
      * @param location
      * @param staff
      */
-    public Meeting(DateTime dateStart, DateTime dateEnd, String subject, Location location, String staff) {
+    public Meeting(DateTime dateStart, DateTime dateEnd, String subject, Location location, List<String> staff) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.subject = subject;
@@ -61,11 +64,11 @@ public class Meeting implements Serializable {
         this.location = location;
     }
 
-    public String getStaff() {
+    public List<String> getStaff() {
         return staff;
     }
 
-    public void setStaff(String staff) {
+    public void setStaff(List<String> staff) {
         this.staff = staff;
     }
 
@@ -73,5 +76,9 @@ public class Meeting implements Serializable {
     public String toString() {
         return "Meeting{" + "dateStart=" + dateStart + ", dateEnd=" + dateStart + ", subject='" + subject + '\'' + ", location='" + location
                 + '\'' + ", staff=" + staff + '}';
+    }
+
+    public String getStafftoString() {
+        return TextUtils.join(", " , staff);
     }
 }
