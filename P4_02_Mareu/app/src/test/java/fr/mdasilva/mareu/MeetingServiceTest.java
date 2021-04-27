@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test on Meeting service
@@ -32,8 +33,8 @@ public class MeetingServiceTest {
     @Test
     public void getMeetingWithSuccess() {
         List<Meeting> meetings = sMeetingApi.getMeeting();
-        List<Meeting> expectedNeighbours = DummyMeetingGenerator.DUMMY_MEETINGS;
-        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+        List<Meeting> expectedMeetings = DummyMeetingGenerator.DUMMY_MEETINGS;
+        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));
     }
 
     @Test
@@ -42,13 +43,22 @@ public class MeetingServiceTest {
         sMeetingApi.deleteMeeting(meetingToDelete);
         assertFalse(sMeetingApi.getMeeting().contains(meetingToDelete));
     }
- //   List<Meeting> getFilterDateMeetings(DateTime dateTime);
 
+ //   List<Meeting> getFilterDateMeetings(DateTime dateTime);
     @Test
     public void getDateFilterWithSuccess() {
-
+        List<Meeting> meetings = sMeetingApi.getMeeting();
+        DateTime meetingDate = meetings.get(0).getDateStart();
+        Meeting meetingsFilter = sMeetingApi.getFilterDateMeetings(meetingDate).get(0);
+        assertTrue(meetings.contains(meetingsFilter));
     }
 
-
 //    List<Meeting> getFilterLocationMeetings(String location);
+    @Test
+    public void getLocationFilterWithSuccess() {
+        List<Meeting> meetings = sMeetingApi.getMeeting();
+        String meetinglocation = meetings.get(0).getLocation().getName();
+        Meeting meetingsFilter = sMeetingApi.getFilterLocationMeetings(meetinglocation).get(0);
+        assertTrue(meetings.contains(meetingsFilter));
+    }
 }
