@@ -61,4 +61,10 @@ public class MeetingServiceTest {
         Meeting meetingsFilter = sMeetingApi.getFilterLocationMeetings(meetinglocation).get(0);
         assertTrue(meetings.contains(meetingsFilter));
     }
+
+    // Test Ajout d'une Reunion
+    @Test
+    public void getAddWithSuccess() {
+
+    }
 }
