@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.mdasilva.mareu.R;
-import fr.mdasilva.mareu.data.api.di.DI;
 import fr.mdasilva.mareu.data.api.LocationApiService;
 import fr.mdasilva.mareu.data.api.MeetingApiService;
+import fr.mdasilva.mareu.data.api.di.DI;
 import fr.mdasilva.mareu.data.model.Location;
 import fr.mdasilva.mareu.data.model.Meeting;
 
@@ -44,15 +44,17 @@ public class AddMeetingActivityViewModel extends AndroidViewModel {
         if (TextUtils.isEmpty(dateEnd)) {
             throw new DateEndFieldEmptyException();
         }
-        if(contributor.size() == 0 ){
-            throw new ContributorEmptyException();
-        }
 
         DateTime mdateStart = DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateStart);
         DateTime mdateEnd = DateTimeFormat.forPattern("dd/MM/yy HH:mm").parseDateTime(dateEnd);
         if (mdateStart.isAfter(mdateEnd)) {
             throw new DateEndInvalidException();
         }
+
+        if(contributor.size() == 0 ){
+            throw new ContributorEmptyException();
+        }
+
         if(sMeetingApi.findMeeting(location,mdateStart, mdateEnd)) {
             throw new MeetingExistException();
         }
@@ -64,8 +66,10 @@ public class AddMeetingActivityViewModel extends AndroidViewModel {
                 contributor));
     }
 
-    public void checkIsEmail(String checkFieldEmpty) throws ContributorEmailException{
-        if (!Patterns.EMAIL_ADDRESS.matcher(checkFieldEmpty).matches()) {throw new ContributorEmailException(); }
+    public void checkIsEmail(String checkFieldEmail) throws ContributorEmailException{
+        if (!Patterns.EMAIL_ADDRESS.matcher(checkFieldEmail).matches()) {
+            throw new ContributorEmailException();
+        }
     }
 
     public List<Location> generateLocations() {

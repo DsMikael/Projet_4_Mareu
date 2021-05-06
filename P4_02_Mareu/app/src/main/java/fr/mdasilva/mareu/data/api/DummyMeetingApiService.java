@@ -55,9 +55,12 @@ public class DummyMeetingApiService implements MeetingApiService {
         for (Meeting meeting : meetings) {
             if (meeting.getLocation().getName().equals(location)) {
                 Interval meetingInteval = new Interval(meeting.getDateStart(), meeting.getDateEnd());
-                if (meetingInteval.contains(dateStart) || meetingInteval.contains(dateEnd)) {
-                    return true;
-                }
+                Interval meetingInteval1 = new Interval(dateStart, dateEnd);
+              if(meetingInteval.contains(dateStart) || meetingInteval.contains(dateEnd) ||
+                      meetingInteval1.contains(meeting.getDateStart()) || meetingInteval1.contains( meeting.getDateEnd()))
+              {
+                  return false;
+              }
             }
         }
         return false;

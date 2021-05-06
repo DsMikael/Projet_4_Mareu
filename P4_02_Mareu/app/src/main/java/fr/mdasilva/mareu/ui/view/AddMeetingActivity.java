@@ -30,10 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.mdasilva.mareu.data.model.Location;
-import fr.mdasilva.mareu.data.model.Meeting;
 import fr.mdasilva.mareu.databinding.ActivityAddMeetingBinding;
 import fr.mdasilva.mareu.ui.viewModel.AddMeetingActivityViewModel;
-import timber.log.Timber;
 
 public class AddMeetingActivity extends AppCompatActivity {
 
@@ -58,26 +56,18 @@ public class AddMeetingActivity extends AppCompatActivity {
         initSpinner();
         initDateTimePicker();
 
-        binding.addContributor.setEndIconOnClickListener(v -> {
-            try {
-                initChipsEdit();
-            } catch (AddMeetingActivityViewModel.ContributorEmailException e) {
-                e.printStackTrace();
-            }
-        });
+        binding.addContributor.setEndIconOnClickListener(v -> initChipsEdit());
+
         binding.formSubject2.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                try {
-                    initChipsEdit();
-                } catch (AddMeetingActivityViewModel.ContributorEmailException e) {
-                    e.printStackTrace();
-                }
+                initChipsEdit();
             }
             return true;
         });
         binding.containedButton.setOnClickListener(v -> {
 
             binding.formSubjectLayout.setError(null);
+            binding.spinnerLayout.setError(null);
             binding.timePickerStartLayout.setError(null);
             binding.timePickerEndLayout.setError(null);
             binding.addContributor.setError(null);
@@ -88,6 +78,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                 chipGroupList.add(i,chip.getText().toString());
             }
             try {
+
                 viewModel.validateForm( binding.timePickerStart.getText().toString(),
                         binding.timePickerEnd.getText().toString(), binding.formSubject.getText().toString(),
                         binding.spinner.getText().toString(),
@@ -176,7 +167,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         });
     }
 
-    private void initChipsEdit() throws AddMeetingActivityViewModel.ContributorEmailException {
+    private void initChipsEdit() {
         String chipText = binding.formSubject2.getText().toString().trim();
         if (!TextUtils.isEmpty(chipText)) {
             Chip chip = new Chip(AddMeetingActivity.this);

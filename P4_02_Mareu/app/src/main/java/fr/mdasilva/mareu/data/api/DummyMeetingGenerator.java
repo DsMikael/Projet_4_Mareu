@@ -14,8 +14,8 @@ public abstract class DummyMeetingGenerator {
 
         static {
                 DUMMY_MEETINGS = Arrays.asList(
-                        new Meeting(new DateTime(2021, 4, 27, 14, 0, 0),
-                                new DateTime(2021, 4, 28, 14, 0, 0), "Meeting A",
+                        new Meeting(new DateTime(2021, 5, 6, 10, 0, 0),
+                                new DateTime(2021, 5, 6, 11, 0, 0), "Meeting A",
                                 DummyLocationGenerator.generateLocations().get(6),
                                Arrays.asList("maxime@lamzone.com", "alex@lamzone.com")),
                         new Meeting(new DateTime(2021, 4, 27, 15, 15, 0),
