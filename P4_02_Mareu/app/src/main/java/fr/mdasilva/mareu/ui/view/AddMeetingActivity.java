@@ -175,12 +175,12 @@ public class AddMeetingActivity extends AppCompatActivity {
             chip.setCloseIconVisible(true);
             try {
                 viewModel.checkIsEmail(chipText);
+                binding.chipGroup.addView(chip);
+                binding.formSubject2.setText("");
+                chip.setOnCloseIconClickListener(v -> binding.chipGroup.removeView(chip));
             }catch (AddMeetingActivityViewModel.ContributorEmailException e){
                 binding.addContributor.setError(viewModel.getErrorMessage(e));
             }
-            binding.chipGroup.addView(chip);
-            binding.formSubject2.setText("");
-            chip.setOnCloseIconClickListener(v -> binding.chipGroup.removeView(chip));
         }
     }
 
@@ -197,4 +197,5 @@ public class AddMeetingActivity extends AppCompatActivity {
         Intent intent = new Intent(context, AddMeetingActivity.class);
         ActivityCompat.startActivityForResult(context,  intent, requestCode ,null);
     }
+
 }

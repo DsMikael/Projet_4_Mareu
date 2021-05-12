@@ -1,5 +1,6 @@
 package fr.mdasilva.mareu.ui.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -8,7 +9,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -45,7 +48,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(ListMeetingActivityViewModel.class);
-        binding.recyclerview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        binding.listMeetings.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         binding.addMeeting.setOnClickListener(v -> {
             AddMeetingActivity.navigate(ListMeetingActivity.this, requestCode);
@@ -66,7 +69,7 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     private void observeMeetings() {
         viewModel.meetings.observe(this,
-                meetings -> binding.recyclerview.setAdapter(new MyMeetingRecyclerViewAdapter(meetings)));
+                meetings -> binding.listMeetings.setAdapter(new MyMeetingRecyclerViewAdapter(meetings)));
     }
 
     private void dateFilter(){
@@ -109,6 +112,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_list_meeting, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) { switch (item.getItemId()) {

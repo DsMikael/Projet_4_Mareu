@@ -44,7 +44,6 @@ public class MeetingServiceTest {
         assertFalse(sMeetingApi.getMeeting().contains(meetingToDelete));
     }
 
- //   List<Meeting> getFilterDateMeetings(DateTime dateTime);
     @Test
     public void getDateFilterWithSuccess() {
         List<Meeting> meetings = sMeetingApi.getMeeting();
@@ -55,7 +54,6 @@ public class MeetingServiceTest {
         //verifier que le 2elements soit False
     }
 
-//    List<Meeting> getFilterLocationMeetings(String location);
     @Test
     public void getLocationFilterWithSuccess() {
         List<Meeting> meetings = sMeetingApi.getMeeting();
@@ -64,9 +62,4 @@ public class MeetingServiceTest {
         assertTrue(meetings.contains(meetingsFilter));
     }
 
-    // Test Ajout d'une Reunion
-    @Test
-    public void getAddWithSuccess() {
-
-    }
 }

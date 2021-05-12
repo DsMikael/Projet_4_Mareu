@@ -59,7 +59,10 @@ public class DummyMeetingApiService implements MeetingApiService {
               if(meetingInteval.contains(dateStart) || meetingInteval.contains(dateEnd) ||
                       meetingInteval1.contains(meeting.getDateStart()) || meetingInteval1.contains( meeting.getDateEnd()))
               {
-                  return false;
+                  if(!meeting.getDateStart().isEqual(dateEnd) && !meeting.getDateEnd().isEqual(dateStart))
+                  {
+                      return true;
+                  }
               }
             }
         }
@@ -69,8 +72,12 @@ public class DummyMeetingApiService implements MeetingApiService {
     public List<Meeting> getFilterDateMeetings(DateTime dateTime) {
         List<Meeting> meetingDateList = new ArrayList<>();
         for (Meeting meeting : meetings) {
-            Interval meetingInteval = new Interval(meeting.getDateStart(), meeting.getDateEnd());
-            if (meetingInteval.contains(dateTime)) {
+            DateTime mdateStart = new DateTime(meeting.getDateStart().getYear(),meeting.getDateStart().getMonthOfYear(),meeting.getDateStart().getDayOfMonth(),0,0);
+            DateTime mdateEnd = new DateTime(meeting.getDateEnd().getYear(),meeting.getDateEnd().getMonthOfYear(),meeting.getDateEnd().getDayOfMonth(),0,0);
+            Timber.d(String.valueOf(meeting));
+            Interval meetingInteval = new Interval(mdateStart, mdateEnd);
+            Timber.d(String.valueOf(meetingInteval));
+            if (meetingInteval.contains(dateTime) || mdateStart.isEqual(dateTime) || mdateEnd.isEqual(dateTime)) {
                 meetingDateList.add(meeting);
             }
         }

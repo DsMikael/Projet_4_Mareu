@@ -25,132 +25,134 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginStart="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/form_subject_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/objet"
-            app:errorEnabled="true"
-            app:counterEnabled="true"
-            app:counterMaxLength="20">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/form_subject"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/colorText"
-                android:maxLength="20"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_margin"
-            android:id="@+id/spinner_layout"
-            app:errorEnabled="true"
-            android:hint="@string/salle">
-
-            <AutoCompleteTextView
-                android:id="@+id/spinner"
-                android:orientation="horizontal"
-                style="@style/Theme.Mareu.field"
-                android:inputType="none"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:id="@+id/time_picker_layout"
-            app:errorEnabled="true">
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:id="@+id/time_picker_start_layout"
-                android:hint="@string/start_reunion"
-                app:errorEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/time_picker_start"
-                    style="@style/Theme.Mareu.field"
-                    android:focusable="false"
-                    android:paddingTop="@dimen/fab_margin"
-                    android:paddingBottom="@dimen/fab_margin"
-                    android:inputType="time"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:layout_marginStart="@dimen/text_margin"
-                android:id="@+id/time_picker_end_layout"
-                android:hint="@string/end_reunion"
-                app:errorEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/time_picker_end"
-                    android:focusable="false"
-                    style="@style/Theme.Mareu.field"
-                    android:paddingTop="@dimen/fab_margin"
-                    android:paddingBottom="@dimen/fab_margin"
-                    android:inputType="time"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_margin"
-            android:hint="@string/participant"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/ic_add"
-            android:id="@+id/add_contributor"
-            app:errorEnabled="true">
+            android:layout_marginStart="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar">
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/form_subject_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:hint="@string/objet"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:errorEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/form_subject2"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/form_subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="20"
+                    android:textColor="@color/colorText"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spinner_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin"
+                android:hint="@string/salle"
+                app:errorEnabled="true">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinner"
+                    style="@style/Theme.Mareu.field"
+                    android:inputType="none"
+                    android:orientation="horizontal"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/time_picker_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/time_picker_start_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/text_margin"
+                    android:layout_weight="0.5"
+                    android:hint="@string/start_reunion"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/time_picker_start"
+                        style="@style/Theme.Mareu.field"
+                        android:focusable="false"
+                        android:inputType="time"
+                        android:paddingTop="@dimen/fab_margin"
+                        android:paddingBottom="@dimen/fab_margin" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/time_picker_end_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/text_margin"
+                    android:layout_weight="0.5"
+                    android:hint="@string/end_reunion"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/time_picker_end"
+                        style="@style/Theme.Mareu.field"
+                        android:focusable="false"
+                        android:inputType="time"
+                        android:paddingTop="@dimen/fab_margin"
+                        android:paddingBottom="@dimen/fab_margin" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_contributor"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin"
+                android:hint="@string/participant"
+                app:endIconDrawable="@drawable/ic_add"
+                app:endIconMode="custom"
+                app:errorEnabled="true">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/form_subject2"
+                    style="@style/Theme.Mareu.field"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/containedButton"
                 style="@style/Theme.Mareu.field"
-                android:inputType="textEmailAddress"
-                android:imeOptions="actionDone"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/containedButton"
-            style="@style/Theme.Mareu.field"
-            android:text="@string/btn_check_register"
-            android:textColor="@color/white"
-            />
-    </LinearLayout>
-
+                android:text="@string/btn_check_register"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

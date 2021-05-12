@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -57,7 +58,6 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
                     meeting.getDateStart().toString("HH:mm"), meeting.getLocation().getName()));
             binding.itemListRecipient.setText(meeting.getStafftoString());
             binding.itemListDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteMeetingEvent(meeting)));
-//            itemView.setOnClickListener(v -> Toast.makeText(v.getContext(), meeting.toString(), Toast.LENGTH_SHORT).show());
         }
 
     }
