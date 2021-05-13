@@ -6,12 +6,12 @@
 * Fonctionnalité :  Gestion de réunions interne.
 * Langage utilisé : Java.
 * Test unitaire : Success.
-* Tests instrumentalisés : null.
-* État des tests : En cours...
+* Tests instrumentalisés : Success.
+* État des tests : Success.
 
 
 
-### À faire ![](https://progress-bar.dev/90/?scale=100&width=200)
+### À faire ![](https://progress-bar.dev/100/?scale=100&width=200)
 
 * [x] Développement de l'application.
     - [x] Choix et Création de la structure (MVVM / <s>MVC</s> / <s>MVP</s>)
@@ -28,12 +28,12 @@
     - [x] Filtres Salle / Dates
 
 * [x] Réalisation de tests unitaires.
-* [ ] Réalisation de tests instrumentalisés.
+* [x] Réalisation de tests instrumentalisés.
 
 
 ### Livrables
 
-* [ ] Les rapports d'exécution (unitaire et instrumentalisé) des tests finaux (qui doivent indiquer que les tests réussissent) au format HTML ;
-* [ ] Un lien vers le dépôt GitHub contenant le code de votre application ;
-* [ ] Un paragraphe justifiant le choix du langage Java pour le développement de l’application.
+* [x] Les rapports d'exécution (unitaire et instrumentalisé) des tests finaux (qui doivent indiquer que les tests réussissent) au format HTML ;
+* [x] Un lien vers le dépôt GitHub contenant le code de votre application ;
+* [x] Un paragraphe justifiant le choix du langage Java pour le développement de l’application.
 

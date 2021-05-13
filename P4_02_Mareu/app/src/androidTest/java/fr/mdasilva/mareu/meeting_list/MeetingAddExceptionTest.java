@@ -64,7 +64,7 @@ public class MeetingAddExceptionTest {
     public void myMeetingsList_checkException() {
         onView(withId(R.id.add_meeting_layout)).check(matches(isDisplayed()));
         pressBack();
-        onView(withId(R.id.containedButton)).perform(click());
+        onView(withId(R.id.containedButton)).perform(scrollTo(), click());
         onView(withText(R.string.e_is_empty)).check(matches(isDisplayed()));
         onView(withId(R.id.form_subject)).perform(scrollTo(), replaceText("Meeting D"), closeSoftKeyboard());
 
