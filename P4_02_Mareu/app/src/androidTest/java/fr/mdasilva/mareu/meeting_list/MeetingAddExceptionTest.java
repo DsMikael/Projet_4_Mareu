@@ -63,7 +63,7 @@ public class MeetingAddExceptionTest {
     @Test
     public void myMeetingsList_checkException() {
         onView(withId(R.id.add_meeting_layout)).check(matches(isDisplayed()));
-        pressBack();
+        SystemClock.sleep(700);
         onView(withId(R.id.containedButton)).perform(scrollTo(), click());
         onView(withText(R.string.e_is_empty)).check(matches(isDisplayed()));
         onView(withId(R.id.form_subject)).perform(scrollTo(), replaceText("Meeting D"), closeSoftKeyboard());
@@ -120,8 +120,9 @@ public class MeetingAddExceptionTest {
                 .perform(pressImeActionButton());
         onView(withId(R.id.containedButton)).perform(scrollTo(), click());
         onView(withText(R.string.e_meeting_exist))
-                .inRoot(withDecorView(not(decorView)))// Here we use decorView
+                .inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));
+        SystemClock.sleep(2000);
         // Select Date Start
         onView(withId(R.id.time_picker_start)).perform(scrollTo(), click());
         onView(isAssignableFrom(DatePicker.class)).perform(setDate(2021, 6, 30));
@@ -131,6 +132,7 @@ public class MeetingAddExceptionTest {
         onView(withId(R.id.time_picker_start)).check(matches(allOf(withText("30/06/21 13:00"),
                 isDisplayed())));
         onView(withId(R.id.containedButton)).perform(scrollTo(), click());
+
 
     }
 
