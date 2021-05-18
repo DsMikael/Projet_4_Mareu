@@ -16,13 +16,11 @@ import fr.mdasilva.mareu.ui.view.ListMeetingActivity;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.PickerActions.setDate;
 import static androidx.test.espresso.contrib.PickerActions.setTime;
@@ -38,7 +36,7 @@ import static org.hamcrest.Matchers.anything;
 @RunWith(AndroidJUnit4.class)
 public class MeetingAddTest {
 
-    private static int ITEMS_COUNT = 3;
+    private static final int ITEMS_COUNT = 3;
 
     @Rule
     public ActivityScenarioRule<ListMeetingActivity> mActivityRule =
@@ -53,10 +51,10 @@ public class MeetingAddTest {
         onView(withId(R.id.add_meeting_layout)).check(matches(isDisplayed()));
         onView(withId(R.id.form_subject)).perform(replaceText("Meeting D"), closeSoftKeyboard());
         // Select Spinner
-        onView(withId(R.id.spinner)).perform(click());
+        onView(withId(R.id.spinner)).perform(scrollTo(), click());
         onData(anything()).atPosition(4).inRoot(isPlatformPopup()).perform(scrollTo(), click());
         // Select Date Start
-        onView(withId(R.id.time_picker_start)).perform(click());
+        onView(withId(R.id.time_picker_start)).perform(scrollTo(), click());
         onView(isAssignableFrom(DatePicker.class)).perform(setDate(2021, 6, 29));
         onView(withId(android.R.id.button1)).perform(click());
         onView(isAssignableFrom(TimePicker.class)).perform(setTime(12, 0));
@@ -64,7 +62,7 @@ public class MeetingAddTest {
         onView(withId(R.id.time_picker_start)).check(matches(allOf(withText("29/06/21 12:00"),
                 isDisplayed())));
         // Select Date end
-        onView(withId(R.id.time_picker_end)).perform(click());
+        onView(withId(R.id.time_picker_end)).perform(scrollTo(), click());
         onView(isAssignableFrom(DatePicker.class)).perform(setDate(2021, 6, 30));
         onView(withId(android.R.id.button1)).perform(click());
         onView(isAssignableFrom(TimePicker.class)).perform(setTime(15, 0));
@@ -72,7 +70,7 @@ public class MeetingAddTest {
         onView(withId(R.id.time_picker_end)).check(matches(allOf(withText("30/06/21 15:00"),
                 isDisplayed())));
         // Add Contributor
-        onView(withId(R.id.form_subject2)).perform(click());
+        onView(withId(R.id.form_subject2)).perform(scrollTo(),click());
         onView(withId(R.id.form_subject2)).perform(replaceText("mickael@lamzone.com"), closeSoftKeyboard())
                 .perform(pressImeActionButton());
         SystemClock.sleep(1000);

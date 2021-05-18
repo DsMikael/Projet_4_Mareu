@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@color/colorTextTitle</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
     <style name="Theme.Mareu.field">
         <item name="android:textStyle">bold</item>

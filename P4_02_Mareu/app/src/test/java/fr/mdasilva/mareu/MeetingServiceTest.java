@@ -50,8 +50,6 @@ public class MeetingServiceTest {
         DateTime meetingDate = meetings.get(0).getDateStart();
         Meeting meetingsFilter = sMeetingApi.getFilterDateMeetings(meetingDate).get(0);
         assertTrue(meetings.contains(meetingsFilter));
-
-        //verifier que le 2elements soit False
     }
 
     @Test

@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -17,16 +16,13 @@ import org.junit.runner.RunWith;
 import fr.mdasilva.mareu.R;
 import fr.mdasilva.mareu.ui.view.AddMeetingActivity;
 
-import static android.os.SystemClock.*;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.PickerActions.setDate;
 import static androidx.test.espresso.contrib.PickerActions.setTime;
@@ -34,12 +30,10 @@ import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
@@ -63,7 +57,6 @@ public class MeetingAddExceptionTest {
     @Test
     public void myMeetingsList_checkException() {
         onView(withId(R.id.add_meeting_layout)).check(matches(isDisplayed()));
-        SystemClock.sleep(700);
         onView(withId(R.id.containedButton)).perform(scrollTo(), click());
         onView(withText(R.string.e_is_empty)).check(matches(isDisplayed()));
         onView(withId(R.id.form_subject)).perform(scrollTo(), replaceText("Meeting D"), closeSoftKeyboard());
