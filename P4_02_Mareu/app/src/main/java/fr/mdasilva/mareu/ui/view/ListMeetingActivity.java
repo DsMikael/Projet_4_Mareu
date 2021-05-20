@@ -3,15 +3,12 @@ package fr.mdasilva.mareu.ui.view;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -50,9 +47,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(ListMeetingActivityViewModel.class);
         binding.listMeetings.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        binding.addMeeting.setOnClickListener(v -> {
-            AddMeetingActivity.navigate(ListMeetingActivity.this, requestCode);
-        });
+        binding.addMeeting.setOnClickListener(v -> AddMeetingActivity.navigate(ListMeetingActivity.this, requestCode));
 
         observeMeetings();
     }
@@ -88,12 +83,10 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     private void locationFilter(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.a_choose_location).setItems(viewModel.generateLocations(), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        String location = viewModel.getLocation().get(which).getName();
-                        viewModel.locationFilter(location);
-                    }
-                });
+        builder.setTitle(R.string.a_choose_location).setItems(viewModel.generateLocations(), (dialog, which) -> {
+            String location = viewModel.getLocation().get(which).getName();
+            viewModel.locationFilter(location);
+        });
         builder.create().show();
     }
 
@@ -113,7 +106,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         return true;
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) { switch (item.getItemId()) {
             case R.id.filter_date:
@@ -131,7 +124,6 @@ public class ListMeetingActivity extends AppCompatActivity {
     }
     /**
      * Fired if the user clicks on a delete button
-     * @param event
      */
     @Subscribe
     public void onDeleteMeeting(DeleteMeetingEvent event){

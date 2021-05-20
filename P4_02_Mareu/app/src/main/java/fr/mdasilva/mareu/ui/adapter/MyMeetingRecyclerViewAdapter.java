@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 
 import fr.mdasilva.mareu.R;
 import fr.mdasilva.mareu.data.event.DeleteMeetingEvent;
@@ -25,7 +25,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public @NotNull ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         final FragmentMeetingBinding binding = FragmentMeetingBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false);
         return new ViewHolder(binding);

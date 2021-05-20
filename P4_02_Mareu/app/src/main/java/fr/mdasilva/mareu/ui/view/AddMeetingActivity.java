@@ -58,7 +58,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         binding.addContributor.setEndIconOnClickListener(v -> initChipsEdit());
 
-        binding.formSubject2.setOnEditorActionListener((v, actionId, event) -> {
+        binding.contributorEmail.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 initChipsEdit();
             }
@@ -100,7 +100,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         });
 
-        binding.formSubject2.addTextChangedListener(new TextWatcher() {
+        binding.contributorEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 binding.addContributor.setError(null);
@@ -168,7 +168,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     private void initChipsEdit() {
-        String chipText = binding.formSubject2.getText().toString().trim();
+        String chipText = binding.contributorEmail.getText().toString().trim();
         if (!TextUtils.isEmpty(chipText)) {
             Chip chip = new Chip(AddMeetingActivity.this);
             chip.setText(chipText);
@@ -176,7 +176,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             try {
                 viewModel.checkIsEmail(chipText);
                 binding.chipGroup.addView(chip);
-                binding.formSubject2.setText("");
+                binding.contributorEmail.setText("");
                 chip.setOnCloseIconClickListener(v -> binding.chipGroup.removeView(chip));
             }catch (AddMeetingActivityViewModel.ContributorEmailException e){
                 binding.addContributor.setError(viewModel.getErrorMessage(e));

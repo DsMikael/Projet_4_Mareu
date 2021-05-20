@@ -16,19 +16,5 @@ import fr.mdasilva.mareu.data.model.Location;
          */
         List<Location> getLocation();
 
-        /**
-         * Deletes a location
-         *
-         * @param location
-         */
-        void deleteLocation(Location location);
-
-        /**
-         * Create a location
-         *
-         * @param location
-         */
-        void createLocation(Location location);
-
         Location findLocationByName(String location);
     }

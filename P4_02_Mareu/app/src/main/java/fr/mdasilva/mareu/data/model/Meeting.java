@@ -3,7 +3,6 @@ package fr.mdasilva.mareu.data.model;
 import android.text.TextUtils;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -16,14 +15,6 @@ public class Meeting implements Serializable {
     private Location location;
     private List<String> staff;
 
-    /**
-     * Constructor
-     *  @param dateStart
-     * @param dateEnd
-     * @param subject
-     * @param location
-     * @param staff
-     */
     public Meeting(DateTime dateStart, DateTime dateEnd, String subject, Location location, List<String> staff) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;

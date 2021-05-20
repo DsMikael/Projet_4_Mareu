@@ -70,8 +70,8 @@ public class MeetingAddTest {
         onView(withId(R.id.time_picker_end)).check(matches(allOf(withText("30/06/21 15:00"),
                 isDisplayed())));
         // Add Contributor
-        onView(withId(R.id.form_subject2)).perform(scrollTo(),click());
-        onView(withId(R.id.form_subject2)).perform(replaceText("mickael@lamzone.com"), closeSoftKeyboard())
+        onView(withId(R.id.contributor_email)).perform(scrollTo(),click());
+        onView(withId(R.id.contributor_email)).perform(replaceText("mickael@lamzone.com"), closeSoftKeyboard())
                 .perform(pressImeActionButton());
         SystemClock.sleep(1000);
         // Click Add Meeting button

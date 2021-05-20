@@ -1,7 +1,5 @@
 package fr.mdasilva.mareu.data.model;
 
-import android.text.TextUtils;
-
 import androidx.annotation.ColorRes;
 
 public class Location {
@@ -10,11 +8,6 @@ public class Location {
     private int color;
     private String name;
 
-    /**
-     * Constructor
-     * @param color
-     * @param name
-     */
     public Location(@ColorRes int color, String name){
         this.color = color;
         this.name = name;

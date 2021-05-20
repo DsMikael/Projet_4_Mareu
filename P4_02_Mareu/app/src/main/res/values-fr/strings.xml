@@ -20,4 +20,6 @@
     <string name="filter_date">Trier par Date</string>
     <string name="filter">filtre</string>
     <string name="a_choose_location">Choix de la Salle</string>
+    <string name="add_button">Creer réunion</string>
+    <string name="color_meeting">Couleur de la réunion</string>
 </resources>

@@ -17,24 +17,6 @@ public class DummyLocationApiService implements LocationApiService {
         return locations;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void deleteLocation(Location location) {
-        locations.remove(location);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param location
-     */
-    @Override
-    public void createLocation(Location location) {
-        locations.add(location);
-    }
-
     @Override
     public Location findLocationByName(String location) {
         for (Location location1 : locations) {

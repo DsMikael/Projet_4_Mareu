@@ -103,13 +103,13 @@ public class MeetingAddExceptionTest {
         onView(withId(R.id.containedButton)).perform(scrollTo(), click());
         onView(withText(R.string.e_min_contibutor)).check(matches(isDisplayed()));
         // Add Contributor
-        onView(withId(R.id.form_subject2)).perform(scrollTo(), click());
-        onView(withId(R.id.form_subject2)).perform(replaceText("mickael"), closeSoftKeyboard())
+        onView(withId(R.id.contributor_email)).perform(scrollTo(), click());
+        onView(withId(R.id.contributor_email)).perform(replaceText("mickael"), closeSoftKeyboard())
                 .perform(pressImeActionButton());
         onView(withText(R.string.e_email_invalid)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.form_subject2)).perform(click());
-        onView(withId(R.id.form_subject2)).perform(replaceText("mickael@lamzone.com"), closeSoftKeyboard())
+        onView(withId(R.id.contributor_email)).perform(click());
+        onView(withId(R.id.contributor_email)).perform(replaceText("mickael@lamzone.com"), closeSoftKeyboard())
                 .perform(pressImeActionButton());
         onView(withId(R.id.containedButton)).perform(scrollTo(), click());
         onView(withText(R.string.e_meeting_exist))

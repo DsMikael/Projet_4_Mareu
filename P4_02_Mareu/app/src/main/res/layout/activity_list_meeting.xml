@@ -40,6 +40,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="@color/colorAddBtn"
         android:src="@drawable/ic_reunion_add_white"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:contentDescription="@string/add_button" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

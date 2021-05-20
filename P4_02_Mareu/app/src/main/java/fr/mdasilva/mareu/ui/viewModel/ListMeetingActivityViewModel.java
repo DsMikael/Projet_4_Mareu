@@ -9,7 +9,6 @@ import androidx.lifecycle.MutableLiveData;
 import org.joda.time.DateTime;
 
 import java.util.List;
-import java.util.Map;
 
 import fr.mdasilva.mareu.data.api.LocationApiService;
 import fr.mdasilva.mareu.data.api.MeetingApiService;

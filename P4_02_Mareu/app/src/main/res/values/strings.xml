@@ -22,4 +22,6 @@
     <string name="filter_date">Sort by Date</string>
     <string name="filter">Filter</string>
     <string name="a_choose_location">Choice of Location</string>
+    <string name="add_button">Create Meeting</string>
+    <string name="color_meeting">Color Meeting</string>
 </resources>

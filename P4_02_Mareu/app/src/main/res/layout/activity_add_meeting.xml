@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/form_subject2"
+                    android:id="@+id/contributor_email"
                     style="@style/Theme.Mareu.field"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress" />
